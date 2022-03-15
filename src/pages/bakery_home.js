@@ -3,7 +3,7 @@ import { StyleSheet, Button, Text, View } from "react-native";
 
 //パン屋としてログイン後、Home画面。ここで焼き上がり送信もする。
 //保手濱担当画面
-const Bread_HomeScreen = ({ navigation }) => {
+const Bakery_HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Button
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Bread_HomeScreen;
+export default Bakery_HomeScreen;
