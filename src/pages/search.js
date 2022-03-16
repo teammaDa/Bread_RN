@@ -29,12 +29,7 @@ const SearchScreen = ({ navigation }) => {
 	
 	return (
 		<View style={styles.container}>
-			<Text>ログインしてください</Text>
 			
-			<Button
-				title="ログイン"
-				onPress={() => navigation.navigate('Login')}
-			/>
 			{isLoading ? (<Text>住所が出ます</Text>) : (
         
         <Text>{data[0].address1}{data[0].address2}</Text>
