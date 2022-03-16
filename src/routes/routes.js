@@ -14,9 +14,9 @@ export default function Router(){
 	return(
     <NavigationContainer>
       <Stack.Navigator>
+				<Stack.Screen name="Search" component={SearchScreen} />
 				<Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-				<Stack.Screen name="Search" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
