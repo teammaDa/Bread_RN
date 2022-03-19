@@ -7,7 +7,7 @@ const HomeScreen = ({ navigation }) => {
 			<Text>ログインしてください</Text>
 			<Button
 				title="ログイン"
-				onPress={() => navigation.navigate('Search')}
+				onPress={() => navigation.navigate('Login')}
 			/>
 		</View>
 	);
