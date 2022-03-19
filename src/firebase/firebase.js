@@ -1,10 +1,9 @@
 import firebase from "firebase";
-import "firebase/auth"
-import "firebase/firestore"
-import "firebase/storage"
+import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
 
 const firebaseConfig = {
-
   apiKey: "AIzaSyBpZzEujkBvCw83wnfN4YvDqDxwyWOGI-o",
 
   authDomain: "reactnative-train.firebaseapp.com",
@@ -17,8 +16,7 @@ const firebaseConfig = {
 
   appId: "1:250334677748:web:46d3d159bbe92b3b6daca1",
 
-  measurementId: "G-ZM9VBMMEHB"
-
+  measurementId: "G-ZM9VBMMEHB",
 };
 
 if (!firebase.apps.length) {
