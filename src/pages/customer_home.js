@@ -93,10 +93,12 @@ const Customer_HomeScreen = ({ navigation }) => {
       <Button
         title="送信"
         onPress={() => {
-          if (!bakerys[0].name && bakerys[0].postcode) {
+          //ここが反映されないので、改善が必要です。
+          if (!bakeries[0].name && bakeries[0].postcode) {
+            <Text>検索結果がありません</Text>;
             getPost();
           } else {
-            <text>検索結果がありません</text>;
+            getPost();
           }
         }}
       />
