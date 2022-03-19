@@ -5,6 +5,7 @@ import HomeScreen from "../pages/home";
 import LoginScreen from "../pages/login";
 import SearchScreen from "../pages/search";
 import Bakery_HomeScreen from "../pages/bakery_home";
+import Bakery_sentresult from "../pages/bakery_sentresult";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ export default function Router() {
         <Stack.Screen name="Search" component={SearchScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="BakerySentResult" component={Bakery_sentresult} />
       </Stack.Navigator>
     </NavigationContainer>
   );
