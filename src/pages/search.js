@@ -33,7 +33,12 @@ const SearchScreen = ({ navigation }) => {
   };
   /*
   useEffect(() => {
-    getPost();
+    firebase.firestore().collection('bakery').get().then((querySnapshot) => {
+      setBakeries(
+        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    });
+
   }, []);
 	*/
 
