@@ -1,17 +1,17 @@
-import React from 'react'
-import { StyleSheet, Button, Text, View } from 'react-native'
+import React from 'react';
+import { StyleSheet, Button, Text, View } from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+const RegisteredScreen = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
-			<Text>ログインしてください</Text>
+			<Text>登録が完了されました</Text>
 			<Button
-				title="ログイン"
+				title="ログインはこちらから"
 				onPress={() => navigation.navigate('Start')}
 			/>
 		</View>
 	);
-}
+};
 
 
 const styles = StyleSheet.create({
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen
+export default RegisteredScreen
