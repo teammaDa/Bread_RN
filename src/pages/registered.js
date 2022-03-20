@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, Button, Text, View } from 'react-native';
 
+//データの引継ぎ
+//https://qiita.com/oda3104/items/de5489cd97ba674cbee5
+
 const RegisteredScreen = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
