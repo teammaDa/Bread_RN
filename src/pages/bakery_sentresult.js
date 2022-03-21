@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Button, Text, View } from "react-native";
 import { firebase } from "../firebase/firebase";
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Button,
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+} from "react-native";
 //import firestore from "@react-native-firebase/firestore";
 //import { format } from "date-fns";
 
@@ -14,31 +23,32 @@ import { firebase } from "../firebase/firebase";
 
 const Bakery_sentresult = ({ navigation }) => {
   console.log("OK1!");
-  const [bakeries, setBakeries] = useState([]);
+  const myTimestamp2 = firebase.firestore.Timestamp.now().toDate();
   const [isLoading, setLoading] = useState(true);
+  const [bakeries, setBakeries] = useState([]);
+  var zt = null;
+
+  //console.log(myTimestamp2);
   useEffect(() => {
     firebase
       .firestore()
-      .collection("bakery")
+      .collection("Baked")
       .get()
       .then((querySnapshot) => {
-        console.log("OK2!");
         setBakeries(
           querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
-        console.log("OK3!");
-        console.log(bakeries.length);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("error");
       });
   }, []);
+
+  console.log(bakeries.map((task) => task.bakedtime.toDate().toString()));
+
   return (
     <View style={styles.container}>
       <Text style={styles.Text}>これまでの焼きたて</Text>
-      {bakeries.map((b) => (
-        <Text>{b.bakery}</Text>
+
+      {bakeries.map((task) => (
+        <li>{task.bakedtime.toDate().toString()}</li>
       ))}
 
       <Button

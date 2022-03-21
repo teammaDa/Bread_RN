@@ -19,7 +19,6 @@ export default function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="BakerySentResult" component={Bakery_sentresult} />
         <Stack.Screen name="Customer_Home" component={Customer_HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -27,6 +26,7 @@ export default function Router() {
         <Stack.Screen name="Registered" component={RegisteredScreen} />
         <Stack.Screen name="Start" component={StartScreen} />
         <Stack.Screen name="BakeryHome" component={Bakery_HomeScreen} />
+        <Stack.Screen name="BakerySentResult" component={Bakery_sentresult} />
       </Stack.Navigator>
     </NavigationContainer>
   );

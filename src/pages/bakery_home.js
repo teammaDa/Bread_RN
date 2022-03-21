@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Button, Text, View } from "react-native";
 import { firebase } from "../firebase/firebase";
 //import firestore from "@react-native-firebase/firestore";
@@ -34,24 +34,20 @@ const Bakery_HomeScreen = ({ navigation }) => {
             })
             .then(() => {
               console.log("Document successfully written!");
-              navigation.navigate("BakerySentResult");
+              //navigation.navigate("BakerySentResult");
             })
             .catch((error) => {
               console.error("Error writing document: ", error);
             });
         }}
       />
+      <Button
+        title="送信結果を確認する"
+        onPress={() => navigation.navigate("BakerySentResult")}
+      />
     </View>
   );
 };
-
-//.then(() => {
-//  console.log("Document successfully written!");
-//})
-//.catch((error) => {
-//  console.error("Error writing document: ", error);
-//})
-
 //将来的に焼き上がり情報にパンの種類を入れるようになった場合、
 //各店舗ドキュメント内に一度の焼き上がりサブコレクションを作り、
 //そこにタイムスタンプとパンの種類を入れると思う
