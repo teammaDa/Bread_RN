@@ -1,25 +1,26 @@
 import React from "react";
 import { StyleSheet, Button, Text, View } from "react-native";
-
 import { firebase } from "../firebase/firebase";
 //import firestore from "@react-native-firebase/firestore";
 //import { format } from "date-fns";
 
 //パン屋としてログイン後、Home画面。ここで焼き上がり送信もする。
 //保手濱担当画面
+
 const Bakery_HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Button
         title="パン屋検索画面に遷移"
-        onPress={() => navigation.navigate("Search")}
+        onPress={() => navigation.navigate("Customer_Home")}
+      />
 
       <Text style={styles.Text}>(パン屋住所)の(パン屋店名)でログイン中</Text>
       <Text style={styles.Text}>パンが焼けましたか？</Text>
       <Button
         title="パンが焼けました"
         onPress={() => {
-          const newTimestamp = firebase.firestore.Timestamp.now();
+          //const newTimestamp = firebase.firestore.Timestamp.now();
           //Bakedコレクションに各店舗ドキュメントをつくり、そこに焼き上がり情報(タイムスタンプ)を入れる
           //ドキュメントが既に存在する場合、上書きされるため焼き上がり情報は常に1パン屋1つのはず
           //データを追加していくのが面倒だったので一旦上書きにしてます
@@ -29,7 +30,7 @@ const Bakery_HomeScreen = ({ navigation }) => {
             .doc("TokyoBakery")
             .set({
               //焼きたて時刻のみ保存
-              newTimestamp,
+              bakedtime: firebase.firestore.Timestamp.now(),
             })
             .then(() => {
               console.log("Document successfully written!");
@@ -44,16 +45,26 @@ const Bakery_HomeScreen = ({ navigation }) => {
   );
 };
 
+//.then(() => {
+//  console.log("Document successfully written!");
+//})
+//.catch((error) => {
+//  console.error("Error writing document: ", error);
+//})
+
+//将来的に焼き上がり情報にパンの種類を入れるようになった場合、
+//各店舗ドキュメント内に一度の焼き上がりサブコレクションを作り、
+//そこにタイムスタンプとパンの種類を入れると思う
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    color: "red",
     alignItems: "center",
     justifyContent: "center",
   },
   Text: {
-    color: "white",
+    color: "black",
     backgroundColor: "orange",
   },
 });

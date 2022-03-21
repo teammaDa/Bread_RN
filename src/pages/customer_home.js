@@ -112,7 +112,7 @@ const Customer_HomeScreen = ({ navigation }) => {
       ))}
       <Button
         title="パン屋専用ホーム画面へ"
-        onPress={() => navigation.navigate("Bakery_Home")}
+        onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
       />
     </View>
   );
