@@ -12,7 +12,7 @@ const Bakery_HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Button
         title="パン屋検索画面に遷移"
-        onPress={() => navigation.navigate("Search")}
+        onPress={() => navigation.navigate("Search")}/>
 
       <Text style={styles.Text}>(パン屋住所)の(パン屋店名)でログイン中</Text>
       <Text style={styles.Text}>パンが焼けましたか？</Text>
