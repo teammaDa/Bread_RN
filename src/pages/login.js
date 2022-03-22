@@ -13,7 +13,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-
+//トークンを取得
 async function registerForPushNotificationsAsync() {
   let token;
   if (Device.isDevice) {
@@ -51,6 +51,8 @@ const LoginScreen = ({ navigation }) => {
 	const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
+
+	//起動時通知用トークン取得
 	useEffect(() => {
 		registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 		notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
@@ -68,6 +70,8 @@ const LoginScreen = ({ navigation }) => {
     
 
   }, []);
+
+	//ボタン押すとトークンがfirestoreに保存
 	return (
 		<View style={styles.container}>
 			<Text>ログインしました</Text>

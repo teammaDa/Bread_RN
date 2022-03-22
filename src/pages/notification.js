@@ -7,6 +7,7 @@ import { firebase } from '../firebase/firebase';
 
 const NotificationScreen = ({ navigation }) => {
 	const [users, setUsers] = useState([]);
+	//通知を送信
 	async function sendPushNotification(expoPushToken) {
 		const message = {
 			to: expoPushToken,
@@ -27,13 +28,14 @@ const NotificationScreen = ({ navigation }) => {
 		});
 	}
 	
-	
+	//user全員に送信
 	const sendNotification= async () => {
 		for(var i=0;i<users.length;i++){
 			sendPushNotification(users[i].token);
 		}
 	}
 
+	//firestoreのユーザデータ取得
   useEffect(() => {
     firebase.firestore().collection('Users').get().then((querySnapshot) => {
       setUsers(
@@ -43,6 +45,7 @@ const NotificationScreen = ({ navigation }) => {
 
   }, []);
 	
+	//ボタンを押すと送信
 	return (
 		<View style={styles.container}>
 			
