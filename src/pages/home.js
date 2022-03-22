@@ -5,7 +5,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text>ログインしてください</Text>
-      <Button title="ログイン" onPress={() => navigation.navigate("Login")} />
+      <Button title="ログイン" onPress={() => navigation.navigate("Start")} />
       <Button title="顧客画面へ" onPress={() => navigation.navigate("Customer_Home")} />
     </View>
   );
