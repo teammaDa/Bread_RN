@@ -11,7 +11,7 @@ const Bakery_HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Button
-        title="パン屋検索画面に遷移"
+        title="顧客ホーム画面に遷移"//変更しました（小川）
         onPress={() => navigation.navigate("Customer_Home")}
       />
 
@@ -44,6 +44,10 @@ const Bakery_HomeScreen = ({ navigation }) => {
       <Button
         title="送信結果を確認する"
         onPress={() => navigation.navigate("BakerySentResult")}
+      />
+      <Button
+        title="パン屋登録画面"//追加しました（小川）
+        onPress={() => navigation.navigate("Start")}
       />
     </View>
   );
