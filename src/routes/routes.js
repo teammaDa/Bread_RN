@@ -23,8 +23,8 @@ export default function Router(){
 	return(
     <NavigationContainer>
       <Stack.Navigator>
+				<Stack.Screen name="Login" component={LoginScreen} />
 				<Stack.Screen name="Customer_Home" component={Customer_HomeScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Registered" component={RegisteredScreen} />

@@ -31,6 +31,7 @@ const NotificationScreen = ({ navigation }) => {
 	//user全員に送信
 	const sendNotification= async () => {
 		for(var i=0;i<users.length;i++){
+			
 			sendPushNotification(users[i].token);
 		}
 	}

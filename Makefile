@@ -19,7 +19,7 @@ wsl:
 	docker-compose up -d
 	docker-compose exec expo_app bash --login
 
-container:
+build:
 	docker-compose build
 	docker-compose up -d
 	docker-compose exec expo_app bash --login
