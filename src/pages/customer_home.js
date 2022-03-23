@@ -3,6 +3,7 @@ import { firebase } from "../firebase/firebase";
 import {
   ActivityIndicator,
   FlatList,
+	ImageBackground,
   StyleSheet,
   Button,
   Text,
@@ -82,16 +83,19 @@ const Customer_HomeScreen = ({ navigation }) => {
   }, []);
 
   return (
+
     <View style={styles.container}>
+			
       <TextInput
         placeholder="郵便番号"
         onChangeText={(text) => {
           setPostcode(text);
         }}
-        style={{ borderWidth: 2, borderColor: "skyblue", margin: 20 }}
+        style={{ borderWidth: 4, borderColor: "#D84315", margin: 40 ,color:"#FAFAFA" ,}}
       />
       <Button
         title="送信"
+				color="#D84315"
         onPress={() => {
           //ここが反映されないので、改善が必要です。
           if (!bakeries[0].name && bakeries[0].postcode) {
@@ -105,15 +109,20 @@ const Customer_HomeScreen = ({ navigation }) => {
       {isLoading ? (
         <Text></Text>
       ) : (
-        <Text>{data[0].address1 + data[0].address2}の近くのパン屋</Text>
+        <Text style={{color:"#FAFAFA"}}>{data[0].address1 + data[0].address2}の近くのパン屋</Text>
       )}
       {nearbakeries.map((b) => (
-        <Text>{b.name}</Text>
+        <Text style={{color:"#FAFAFA"}}>{b.name}</Text>
       ))}
       <Button
         title="パン屋専用ホーム画面へ"
+				color="#D84315"
         onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
       />
+			
+			<ImageBackground source={require('../../assets/pan_bread_set.png')} style={{width:"50%",height:"50%",alignSelf:"flex-end"}}>
+				
+			</ImageBackground>
     </View>
   );
 };
@@ -121,10 +130,18 @@ const Customer_HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F4511E",
     alignItems: "center",
     justifyContent: "center",
   },
+	seacrhbox:{
+		color:"#FAFAFA",
+		width:"100%",
+		height:"200%",
+	},
+	sendbutton:{
+		backgroundColor:"#D84315",
+	}
 });
 
 export default Customer_HomeScreen;
