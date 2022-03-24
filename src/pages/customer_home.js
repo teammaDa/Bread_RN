@@ -85,14 +85,13 @@ const Customer_HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Div className={css.box}>
         <ImageBackground
           source={{
             uri: "https://pictkan.com/uploads/converted/15/06/12/1571213585-background-2561_1920-jNP-1920x1280-MM-100.jpg",
           }}
-          style={{ width: "100%", height: "100%", alignSelf: "flex-end" }}
+          style={styles.image}
         >
-          <Div id="form-div">
+          <div id="form-div">
             <TextInput
               class="textInput"
               placeholder="郵便番号"
@@ -122,12 +121,21 @@ const Customer_HomeScreen = ({ navigation }) => {
               title="パン屋専用ホーム画面へ"
               onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
             />
-          </Div>
+          </div>
         </ImageBackground>
-      </Div>
-      ;
     </View>
   );
 };
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		flexDirection: "column"
+	},
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center"
+	}
+ });
 
 export default Customer_HomeScreen;
