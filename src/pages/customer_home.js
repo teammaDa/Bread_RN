@@ -9,7 +9,9 @@ import {
   View,
   TextInput,
   ScrollView,
+  ImageBackground,
 } from "react-native";
+import css from "./style.css";
 
 //中島さんのsearchをコピペしました！
 const Customer_HomeScreen = ({ navigation }) => {
@@ -83,48 +85,49 @@ const Customer_HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder="郵便番号"
-        onChangeText={(text) => {
-          setPostcode(text);
-        }}
-        style={{ borderWidth: 2, borderColor: "skyblue", margin: 20 }}
-      />
-      <Button
-        title="送信"
-        onPress={() => {
-          //ここが反映されないので、改善が必要です。
-          if (!bakeries[0].name && bakeries[0].postcode) {
-            <Text>検索結果がありません</Text>;
-            getPost();
-          } else {
-            getPost();
-          }
-        }}
-      />
-      {isLoading ? (
-        <Text></Text>
-      ) : (
-        <Text>{data[0].address1 + data[0].address2}の近くのパン屋</Text>
-      )}
-      {nearbakeries.map((b) => (
-        <Text>{b.name}</Text>
-      ))}
-      <Button
-        title="パン屋専用ホーム画面へ"
-        onPress={() => navigation.navigate("Bakery_Home")}
-      />
+      <Div className={css.box}>
+        <ImageBackground
+          source={{
+            uri: "https://pictkan.com/uploads/converted/15/06/12/1571213585-background-2561_1920-jNP-1920x1280-MM-100.jpg",
+          }}
+          style={{ width: "100%", height: "100%", alignSelf: "flex-end" }}
+        >
+          <Div id="form-div">
+            <TextInput
+              class="textInput"
+              placeholder="郵便番号"
+              onChangeText={(text) => {
+                setPostcode(text);
+              }}
+              style={{ borderWidth: 2, borderColor: "skyblue", margin: 20 }}
+            />
+
+            <Button
+              class="button"
+              title="送信"
+              onPress={() => {
+                getPost();
+              }}
+            ></Button>
+            {isLoading ? (
+              <Text></Text>
+            ) : (
+              <Text>{data[0].address1 + data[0].address2}の近くのパン屋</Text>
+            )}
+            {nearbakeries.map((b) => (
+              <Text>{b.name}</Text>
+            ))}
+            <Button
+              class="button"
+              title="パン屋専用ホーム画面へ"
+              onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
+            />
+          </Div>
+        </ImageBackground>
+      </Div>
+      ;
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default Customer_HomeScreen;
