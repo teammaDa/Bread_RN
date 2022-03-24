@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 // import {Useeffect} from "react";
 import { StyleSheet,Text, View, TextInput, Button, SafeAreaView } from 'react-native';
 import { firebase } from "../firebase/firebase";
-
 const StartScreen = ({ navigation }) => {
 	const [ login_id, setLogin_id ] = useState("");
 	const [ password, setPassword ] = useState("");

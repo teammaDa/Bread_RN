@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Button, Text, View, TextInput, SafeAreaView } from "react-native";
 import { firebase } from "../firebase/firebase";
 
+
+
 const RegisterScreen = ({ navigation }) => {
   const [storename, setStorename] = useState('');
   const [postcode, setPostcode] = useState('');
