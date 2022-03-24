@@ -115,9 +115,15 @@ const Customer_HomeScreen = ({ navigation }) => {
         <Text style={{color:"#FAFAFA"}}>{b.name}</Text>
       ))}
       <Button
+<<<<<<< HEAD
         title="パン屋専用ホーム画面へ"
 				color="#D84315"
         onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
+=======
+        title="パン屋専用ホーム画面へ（今だけログイン画面へ）"
+        onPress={() => navigation.navigate("Start")}
+        // ログイン画面確認のために、BakeryHome　からログイン画面に一時的に変更
+>>>>>>> a6f4fb338239e14cb8149bd1974724619905658e
       />
 			
 			<ImageBackground source={require('../../assets/pan_bread_set.png')} style={{width:"50%",height:"50%",alignSelf:"flex-end"}}>
