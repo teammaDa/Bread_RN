@@ -111,8 +111,9 @@ const Customer_HomeScreen = ({ navigation }) => {
         <Text>{b.name}</Text>
       ))}
       <Button
-        title="パン屋専用ホーム画面へ"
-        onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
+        title="パン屋専用ホーム画面へ（今だけログイン画面へ）"
+        onPress={() => navigation.navigate("Start")}
+        // ログイン画面確認のために、BakeryHome　からログイン画面に一時的に変更
       />
     </View>
   );

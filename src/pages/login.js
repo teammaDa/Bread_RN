@@ -6,8 +6,8 @@ const LoginScreen = ({ navigation }) => {
 		<View style={styles.container}>
 			<Text>ログインしました</Text>
 			<Button
-				title="ホームへ"
-				onPress={() => navigation.navigate('Home')}
+				title="パン屋専用ホーム画面へ"
+				onPress={() => navigation.navigate('BakeryHome')}
 			/>
 		</View>
 	);
