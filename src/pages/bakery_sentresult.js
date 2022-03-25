@@ -9,6 +9,8 @@ import {
   View,
   TextInput,
   ScrollView,
+  ImageBackground,
+  SafeAreaView
 } from "react-native";
 //import firestore from "@react-native-firebase/firestore";
 //import { format } from "date-fns";
@@ -44,31 +46,62 @@ const Bakery_sentresult = ({ navigation }) => {
   console.log(bakeries.map((task) => task.bakedtime.toDate().toString()));
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.Text}>これまでの焼きたて</Text>
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={{
+          uri: "https://pictkan.com/uploads/converted/15/06/12/1571213585-background-2561_1920-jNP-1920x1280-MM-100.jpg",
+        }}
+        style={styles.image}
+      >
+				<View style={styles.box1}>
+          <Text style={styles.Text}>これまでの焼きたて</Text>
 
-      {bakeries.map((task) => (
-        <li>{task.bakedtime.toDate().toString()}</li>
-      ))}
+          {bakeries.map((task) => (
+            <li>{task.bakedtime.toDate().toString()}</li>
+          ))}
 
-      <Button
-        title="パン屋検索画面に遷移"
-        onPress={() => navigation.navigate("Search")}
-      />
-      <Button
-        title="焼きたて送信画面に遷移"
-        onPress={() => navigation.navigate("BakeryHome")}
-      />
-    </View>
+          <Button
+            title="パン屋検索画面に遷移"
+            onPress={() => navigation.navigate("Search")}
+            color = "orange"
+          />
+          <Text> </Text>
+          <Button
+            title="焼きたて送信画面に遷移"
+            onPress={() => navigation.navigate("BakeryHome")}
+            color = "orange"
+          />
+        </View>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    flexDirection: 'column',
+    textAlign: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
     justifyContent: "center",
+  },
+  box1:{
+    backgroundColor:"#48484866",
+    width:"50%",
+    height:"50%",
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    alignItems:'center',
   },
   Text: {
     color: "black",
