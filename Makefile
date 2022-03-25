@@ -1,10 +1,3 @@
-win:
-	chmod +x ./get-ip-win.sh
-	./get-ip-win.sh
-	docker-compose build
-	docker-compose up -d
-	docker-compose exec expo_app bash --login
-
 mac:
 	chmod +x ./get-ip-mac.sh
 	./get-ip-mac.sh
@@ -19,7 +12,7 @@ wsl:
 	docker-compose up -d
 	docker-compose exec expo_app bash --login
 
-container:
+build:
 	docker-compose build
 	docker-compose up -d
 	docker-compose exec expo_app bash --login
