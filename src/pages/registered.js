@@ -15,11 +15,11 @@ const RegisteredScreen = ({ navigation }) => {
 					>
           <View style={styles.box1}>
 
-			<Text>登録が完了されました</Text>
+			<Text style={styles.textWhite}>登録が完了されました</Text>
 			<Button
 				title="ログインはこちらから"
 				onPress={() => navigation.navigate('Start')}
-				color = "orange"
+				color = "#F4511E"
 			/>
 			</View>
         </ImageBackground>
@@ -62,12 +62,13 @@ const styles = StyleSheet.create({
   },
   formLabel: {
     paddingRight: 16,
+    color: "white"
   },
   formControl: {
     height: 40,
     width: 160,
     padding: 8,
-    borderColor: 'orange',
+    borderColor: '#F4511E',
     borderWidth: 1
   },
   listItem: {
@@ -77,7 +78,10 @@ const styles = StyleSheet.create({
     padding: 16,
     borderColor: 'gray',
     borderWidth: 1,
-  }
+  },
+  textWhite:{
+		color:"#FAFAFA"
+	}
 });
 
 export default RegisteredScreen

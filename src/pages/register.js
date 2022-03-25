@@ -46,12 +46,12 @@ const RegisterScreen = ({ navigation }) => {
               />
             </View>
 
-            <Text>お店の所在地を、郵便番号で登録してください</Text>
-            <Text style={styles.formLabel}>郵便番号</Text>
+            <Text style={styles.formLabel}>郵便番号から取得した住所を登録してください</Text>
+            <Text style={styles.formLabel}>住所</Text>
             <View style={styles.formGroup}>
               <TextInput
                 style={styles.formControl}
-                placeholder="postcode"
+                placeholder="address from postcode"
                 onChangeText={(text) => setPostcode(text)}
               />
             </View>
@@ -76,11 +76,11 @@ const RegisterScreen = ({ navigation }) => {
           
             <Button title="データを保存する"
               onPress={() => {sendDatatoFirestore()}}
-              color = "orange"
+              color = "#F4511E"
             />
             <Button title="登録する"
               onPress={() => navigation.navigate('Registered')}
-              color = "orange"
+              color = "#F4511E"
               />
           </View>
         </ImageBackground>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   box1:{
     backgroundColor:"#48484866",
     width:"60%",
-    height:"70%",
+    height:"80%",
     borderBottomLeftRadius: 7,
     borderBottomRightRadius: 7,
     borderTopLeftRadius: 7,
@@ -124,12 +124,13 @@ const styles = StyleSheet.create({
   formLabel: {
     paddingRight: 16,
 	  marginVertical: 8,
+    color: "white"
   },
   formControl: {
     height: 40,
     width: 160,
     padding: 8,
-    borderColor: 'orange',
+    borderColor: '#F4511E',
     borderWidth: 1
   },
   listItem: {
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderColor: 'gray',
     borderWidth: 1,
-  }
+  },
 });
 
 export default RegisterScreen;
