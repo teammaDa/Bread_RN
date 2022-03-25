@@ -20,7 +20,8 @@ const Customer_HomeScreen = ({ navigation }) => {
   const [postcode, setPostcode] = useState("");
   const [bakeries, setBakeries] = useState([]);
   const [nearbakeries, setNearBakeries] = useState([]);
-  var address = "";
+	const [address,setAddress]=useState("");
+  
 
   const buttonAlert = () => {
     alert("正しい郵便番号を入力してください");
@@ -33,20 +34,11 @@ const Customer_HomeScreen = ({ navigation }) => {
       );
       const json = await response.json();
       setData(json.results);
-      console.log(json);
-      console.log(json.results);
-      console.log(json.results[0].address1);
-      console.log(json.results);
-      address = json.results[0].address1 + json.results[0].address2;
-      console.log(address);
-      console.log("log");
-      console.log(json.results[0].address1 + json.results[0].address2);
-
+      setAddress(json.results[0].address1 + json.results[0].address2);
       if (!json.results[0].address1) {
         buttonAlert();
       }
 
-      getBakery();
       setLoading(false);
     } catch (error) {
       buttonAlert();
@@ -55,31 +47,6 @@ const Customer_HomeScreen = ({ navigation }) => {
     }
   };
 
-  const getBakery = async () => {
-    nearbakeries.length = 0;
-    for (var i = 0; i < bakeries.length; i++) {
-      const bakery_post = await fetch(
-        "https://zipcloud.ibsnet.co.jp/api/search?zipcode=" +
-          bakeries[i].postcode
-      );
-      const json_bakery = await bakery_post.json();
-      console.log("get");
-      console.log(json_bakery);
-      console.log(
-        json_bakery.results[0].address1 + json_bakery.results[0].address2
-      );
-
-      if (
-        address ==
-        json_bakery.results[0].address1 + json_bakery.results[0].address2
-      ) {
-        setNearBakeries([...nearbakeries, { name: bakeries[i].name }]);
-        console.log(bakeries[i].postcode);
-        console.log(nearbakeries);
-      }
-      console.log(bakeries[i].name);
-    }
-  };
 
   useEffect(() => {
     firebase
@@ -130,9 +97,17 @@ const Customer_HomeScreen = ({ navigation }) => {
               {data[0].address1 + data[0].address2}の近くのパン屋
             </Text>
           )}
-          {nearbakeries.map((b) => (
-            <Text style={styles.textWhite}>{b.name}</Text>
-          ))}
+          {bakeries.map((b) => (
+							<View>
+								{b.address==address?(
+									<Text key={b.id} style={styles.textWhite}>{b.name}</Text>
+								):
+								(
+									<Text key={b.id} style={styles.textWhite}></Text>
+								)	
+								}
+							</View>
+            ))}
         </View>
         <Button
           class="button"
