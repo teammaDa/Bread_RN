@@ -70,12 +70,14 @@ const SearchScreen = ({ navigation }) => {
             style={{ borderWidth: 2, borderColor: "#E11F" , margin: 20 }}
           />
           <Button
-            title="送信"
+            title="検索"
             onPress={() => {
               getPost();
             }}
             color = "#F4511E"
           />
+          <Text> </Text>
+          <Text style={styles.textWhite}>検索で取得した「住所情報」は初期登録時に必要になります。{"\n"}画面を新規登録画面へ進む前に、コピーしておきましょう。</Text>
           <Text> </Text>
           <Button title = "新規登録画面へ進む"
 									onPress={() => navigation.navigate('Register')}
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
   box1:{
     backgroundColor:"#48484866",
     width:"50%",
-    height:"50%",
+    height:"60%",
     borderBottomLeftRadius: 7,
     borderBottomRightRadius: 7,
     borderTopLeftRadius: 7,
