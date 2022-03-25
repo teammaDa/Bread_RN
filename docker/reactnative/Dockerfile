@@ -6,8 +6,8 @@ ADD . /app
 
 RUN apk update && apk add bash
 
-#RUN npm install -g expo-cli
+RUN npm install -g expo-cli
 
-#RUN npm install
+RUN npm install
 
 #CMD ["npm","start"]

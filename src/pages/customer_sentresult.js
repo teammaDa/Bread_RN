@@ -23,7 +23,7 @@ import {
 //var docRef = db.collection("bakery");
 //var bakedtime = []; //時刻を読み込んで格納するarrayを宣言
 
-const Bakery_sentresult = ({ navigation }) => {
+const Customer_sentresult = ({ navigation }) => {
   console.log("OK1!");
   const myTimestamp2 = firebase.firestore.Timestamp.now().toDate();
   const [isLoading, setLoading] = useState(true);
@@ -60,13 +60,12 @@ const Bakery_sentresult = ({ navigation }) => {
           {bakeries.map((task) => (
             <Text  style={styles.textWhite}>{task.bakedtime.toDate().toString()}</Text>
           ))}
-
           <Text> </Text>
           <Button
-            title="焼きたて送信画面に戻る"
-            onPress={() => navigation.navigate("BakeryHome")}
+            title="パン屋検索画面へ"
+            onPress={() => navigation.navigate("Customer_Home")}
             color = "#F4511E"
-          />
+          /> 
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -104,4 +103,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Bakery_sentresult;
+export default Customer_sentresult;
