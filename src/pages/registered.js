@@ -16,11 +16,14 @@ const RegisteredScreen = ({ navigation }) => {
           <View style={styles.box1}>
 
 			<Text style={styles.textWhite}>登録が完了されました</Text>
+			<View style={styles.buttonview}>
 			<Button
 				title="ログインはこちらから"
 				onPress={() => navigation.navigate('Start')}
-				color = "#F4511E"
+				color="#FAFAFA"
+				
 			/>
+			</View>
 			</View>
         </ImageBackground>
       </SafeAreaView>
@@ -81,6 +84,13 @@ const styles = StyleSheet.create({
   },
   textWhite:{
 		color:"#FAFAFA"
+	},
+	buttonview:{
+		backgroundColor: "#F4511E",
+		borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
 	}
 });
 

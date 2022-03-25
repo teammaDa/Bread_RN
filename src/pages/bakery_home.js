@@ -67,12 +67,14 @@ const Bakery_HomeScreen = ({ navigation }) => {
       >
         <View style={styles.box1}>
           <Text style={styles.Text}> </Text>
+					<View style={styles.buttonview}>
           <Button
             title="お客さん専用ページへ" //変更しました（小川）
-            color="#F4511E"
-            style={styles.button1}
+            color="#FAFAFA"
+					style={styles.buttonview}
             onPress={() => navigation.navigate("Customer_Home")}
           />
+					</View>
 
           <Text style={styles.Text}>
             {postcode}の{storename}でログイン中
@@ -80,10 +82,10 @@ const Bakery_HomeScreen = ({ navigation }) => {
           <Text style={styles.Text}>
             パンが焼けましたか？{"\n"}パンが焼けたことを知らせましょう！
           </Text>
+					<View style={styles.buttonview}>
           <Button
             title="パンが焼けました"
-            color="#F4511E"
-            style={styles.button1}
+						color="#FAFAFA"
             onPress={() => {
 
 							sendNotification();
@@ -110,11 +112,12 @@ const Bakery_HomeScreen = ({ navigation }) => {
                 });
             }}
           />
+					</View>
           <Text style={styles.Text}> </Text>
+					<View style={styles.buttonview}>
           <Button
             title="送信結果を確認する"
-            color="#F4511E"
-            style={styles.button1}
+            color="#FAFAFA"
             onPress={() =>{
 
 						
@@ -126,6 +129,7 @@ const Bakery_HomeScreen = ({ navigation }) => {
 						
 						}}
           />
+					</View>
         </View>
       </ImageBackground>
     </View>
@@ -162,10 +166,16 @@ const styles = StyleSheet.create({
     marginBottom: "auto",
     alignItems: "center",
   },
-  button1: {
-    letterSpacing: 5,
+  
+	buttonview:{
+		letterSpacing: 5,
     padding: 10,
-  },
+		backgroundColor: "#F4511E",
+		borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+	}
 });
 
 export default Bakery_HomeScreen;

@@ -73,15 +73,18 @@ const RegisterScreen = ({ navigation }) => {
                 onChangeText={(text) => setPassword(text)}
               />
             </View>
-          
+					<View style={styles.buttonview}>
             <Button title="データを保存する"
               onPress={() => {sendDatatoFirestore()}}
-              color = "#F4511E"
+              color="#FAFAFA"
             />
+						</View>
+					<View style={styles.buttonview}>
             <Button title="登録する"
               onPress={() => navigation.navigate('Registered')}
-              color = "#F4511E"
+              color="#FAFAFA"
               />
+							</View>
           </View>
         </ImageBackground>
       </SafeAreaView>
@@ -141,6 +144,13 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
   },
+	buttonview:{
+		backgroundColor: "#F4511E",
+		borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+	}
 });
 
 export default RegisterScreen;
