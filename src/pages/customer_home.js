@@ -92,7 +92,8 @@ const Customer_HomeScreen = ({ navigation }) => {
           style={styles.image}
         >
           <View style={styles.box1}>
-						<Text style={styles.textWhite}>郵便番号を入力すると近くのパン屋を検索します</Text>
+						<Text style={styles.textWhite}>郵便番号を入力すると</Text>
+						<Text style={styles.textWhite}>近くのパン屋を検索します</Text>
             <TextInput
               class="textInput"
               placeholder="郵便番号"
