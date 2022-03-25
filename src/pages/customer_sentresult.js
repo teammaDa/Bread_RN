@@ -10,8 +10,9 @@ import {
   TextInput,
   ScrollView,
   ImageBackground,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
+import { useRoute } from "@react-navigation/native";
 //import firestore from "@react-native-firebase/firestore";
 //import { format } from "date-fns";
 
@@ -25,6 +26,8 @@ import {
 
 const Customer_sentresult = ({ navigation }) => {
   console.log("OK1!");
+  const route = useRoute();
+  const storename = route.params.storename;
   const myTimestamp2 = firebase.firestore.Timestamp.now().toDate();
   const [isLoading, setLoading] = useState(true);
   const [bakeries, setBakeries] = useState([]);
@@ -35,6 +38,8 @@ const Customer_sentresult = ({ navigation }) => {
     firebase
       .firestore()
       .collection("Baked")
+      .doc(storename)
+      .collection("BakedTimestamps")
       .get()
       .then((querySnapshot) => {
         setBakeries(
@@ -53,19 +58,21 @@ const Customer_sentresult = ({ navigation }) => {
         }}
         style={styles.image}
       >
-				<View style={styles.box1}>
+        <View style={styles.box1}>
           <Text style={styles.Text}> </Text>
-          <Text style={styles.textWhite}>これまでの焼きたて</Text>
+          <Text style={styles.textWhite}>{storename}のこれまでの焼きたて</Text>
 
           {bakeries.map((task) => (
-            <Text  style={styles.textWhite}>{task.bakedtime.toDate().toString()}</Text>
+            <Text style={styles.textWhite}>
+              {task.bakedtime.toDate().toString()}
+            </Text>
           ))}
           <Text> </Text>
           <Button
             title="パン屋検索画面へ"
             onPress={() => navigation.navigate("Customer_Home")}
-            color = "#F4511E"
-          /> 
+            color="#F4511E"
+          />
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -75,32 +82,32 @@ const Customer_sentresult = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    textAlign: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    textAlign: "center",
+    justifyContent: "center",
   },
   image: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
   },
-  box1:{
-    backgroundColor:"#48484866",
-    width:"50%",
-    height:"50%",
+  box1: {
+    backgroundColor: "#48484866",
+    width: "50%",
+    height: "50%",
     borderBottomLeftRadius: 7,
     borderBottomRightRadius: 7,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    alignItems:'center',
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "auto",
+    marginBottom: "auto",
+    alignItems: "center",
   },
-  textWhite:{
-		color:"#FAFAFA"
-	}
+  textWhite: {
+    color: "#FAFAFA",
+  },
 });
 
 export default Customer_sentresult;
