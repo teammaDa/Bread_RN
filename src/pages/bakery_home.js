@@ -66,7 +66,6 @@ const Bakery_HomeScreen = ({ navigation }) => {
       />
 			</View>
 			</ImageBackground>
-
     </View>
   );
 };
