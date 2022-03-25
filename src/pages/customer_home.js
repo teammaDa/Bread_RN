@@ -11,7 +11,7 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-import css from "./style.css";
+//import css from "./style.css";
 
 //中島さんのsearchをコピペしました！
 const Customer_HomeScreen = ({ navigation }) => {
@@ -91,19 +91,21 @@ const Customer_HomeScreen = ({ navigation }) => {
           }}
           style={styles.image}
         >
-          <div id="form-div">
+          <View style={styles.box1}>
+						<Text style={styles.textWhite}>郵便番号を入力すると近くのパン屋を検索します</Text>
             <TextInput
               class="textInput"
               placeholder="郵便番号"
               onChangeText={(text) => {
                 setPostcode(text);
               }}
-              style={{ borderWidth: 2, borderColor: "skyblue", margin: 20 }}
+              style={{ borderWidth: 2, borderColor: "#E11F", margin: 20 }}
             />
 
             <Button
               class="button"
               title="送信"
+							color="#F4511E"
               onPress={() => {
                 getPost();
               }}
@@ -111,17 +113,19 @@ const Customer_HomeScreen = ({ navigation }) => {
             {isLoading ? (
               <Text></Text>
             ) : (
-              <Text>{data[0].address1 + data[0].address2}の近くのパン屋</Text>
+              <Text  style={styles.textWhite}>{data[0].address1 + data[0].address2}の近くのパン屋</Text>
             )}
             {nearbakeries.map((b) => (
-              <Text>{b.name}</Text>
+              <Text  style={styles.textWhite}>{b.name}</Text>
             ))}
-            <Button
+            
+          </View>
+					<Button
               class="button"
               title="パン屋専用ホーム画面へ"
+							color="#F4511E"
               onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
             />
-          </div>
         </ImageBackground>
     </View>
   );
@@ -135,7 +139,25 @@ const styles = StyleSheet.create({
 		flex: 1,
 		resizeMode: "cover",
 		justifyContent: "center"
+	},
+	box1:{
+		backgroundColor:"#48484880",
+		width:"50%",
+		height:"50%",
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+		marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+		alignItems:'center',
+	},
+	textWhite:{
+		color:"#FAFAFA"
 	}
+
  });
 
 export default Customer_HomeScreen;
