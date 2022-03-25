@@ -77,21 +77,27 @@ const StartScreen = ({ navigation }) => {
               onChangeText={(text) => setPassword(text)}
             />
           </View>
+					<View style={styles.buttonview}>
+
+					
           <Button
             title="ログイン"
             onPress={() => {
               testLogin();
             }}
-            color="#F4511E"
+            color="#FAFAFA"
           />
+					</View>
 
           <Text style={styles.formLabel}>新規登録はこちらから</Text>
           <View style={styles.formGroup}>
+					<View style={styles.buttonview}>
             <Button
               title="新規登録する"
               onPress={() => navigation.navigate("Search")}
-              color="#F4511E"
+              color="#FAFAFA"
             />
+						</View>
           </View>
         </View>
       </ImageBackground>
@@ -152,6 +158,13 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
   },
+	buttonview:{
+		backgroundColor: "#F4511E",
+		borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+	}
 });
 
 export default StartScreen;

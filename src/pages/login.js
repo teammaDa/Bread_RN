@@ -52,7 +52,8 @@ const LoginScreen = ({ navigation }) => {
       >
         <View style={styles.box1}>
           <Text style={styles.textWhite}>ログインしました</Text>
-          <Button
+					<View style={styles.buttonview}>
+					<Button
             title="パン屋専用ホーム画面へ"
             //TODO: 第二引数にpostcodeとstorenameを入れ、bakery_home.jsに渡す 3/25
             onPress={() =>
@@ -61,8 +62,9 @@ const LoginScreen = ({ navigation }) => {
                 postcode: postcode[0],
               })
             }
-            color="#F4511E"
+            color="#FAFAFA"
           />
+					</View>
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -98,6 +100,13 @@ const styles = StyleSheet.create({
   textWhite: {
     color: "#FAFAFA",
   },
+	buttonview:{
+		backgroundColor: "#F4511E",
+		borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+	}
 });
 
 export default LoginScreen;

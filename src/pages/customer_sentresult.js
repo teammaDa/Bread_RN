@@ -68,11 +68,13 @@ const Customer_sentresult = ({ navigation }) => {
             </Text>
           ))}
           <Text> </Text>
+					<View style={styles.buttonview}>
           <Button
             title="パン屋検索画面へ"
             onPress={() => navigation.navigate("Customer_Home")}
-            color="#F4511E"
+            color="#FAFAFA"
           />
+					</View>
         </View>
       </ImageBackground>
     </SafeAreaView>
@@ -108,6 +110,13 @@ const styles = StyleSheet.create({
   textWhite: {
     color: "#FAFAFA",
   },
+	buttonview:{
+		backgroundColor: "#F4511E",
+		borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+	}
 });
 
 export default Customer_sentresult;

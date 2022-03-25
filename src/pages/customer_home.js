@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef} from "react";
 import { firebase } from "../firebase/firebase";
 import {
   ActivityIndicator,
@@ -11,7 +11,52 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-//import css from "./style.css";
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+
+//import styles from "../styles/styles";
+
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
+//トークンを取得
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  return token;
+}
+
 
 //中島さんのsearchをコピペしました！
 const Customer_HomeScreen = ({ navigation }) => {
@@ -20,7 +65,11 @@ const Customer_HomeScreen = ({ navigation }) => {
   const [postcode, setPostcode] = useState("");
   const [bakeries, setBakeries] = useState([]);
   const [nearbakeries, setNearBakeries] = useState([]);
-  const [address, setAddress] = useState("");
+	const [address,setAddress]=useState("");
+  const [expoPushToken, setExpoPushToken] = useState('');
+	const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
   const [storename, setStorename] = useState("");
 
   const getPost = async () => {
@@ -46,13 +95,26 @@ const Customer_HomeScreen = ({ navigation }) => {
   useEffect(() => {
     firebase
       .firestore()
-      .collection("bakery")
+      .collection("registered")
       .get()
       .then((querySnapshot) => {
         setBakeries(
           querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
       });
+			registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+		notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
   }, []);
 
   return (
@@ -76,16 +138,27 @@ const Customer_HomeScreen = ({ navigation }) => {
             }}
             style={{ borderWidth: 2, borderColor: "#E11F", margin: 20 }}
           />
-
-          <Button
-            class="button"
-            title="送信"
-            color="#F4511E"
-            onPress={() => {
-              getPost();
-            }}
-          ></Button>
-          {isLoading ? (
+					<View style={styles.buttonview}>
+            <Button
+              class="button"
+              title="送信"
+							color="#FAFAFA"
+              onPress={() => {
+                getPost();
+								firebase.firestore().collection("Clients").doc(expoPushToken)
+						.set({
+								//焼きたて時刻のみ保存
+								token:expoPushToken,
+						}).then(() => {
+								console.log("Document successfully written!");
+								navigation.navigate('Notification');
+						}).catch((error) => {
+								console.error("Error writing document: ", error);
+						});
+              }}
+            ></Button>
+						</View>
+            {isLoading ? (
             <Text> </Text>
           ) : (
             <Text style={styles.textWhite}>
@@ -94,9 +167,9 @@ const Customer_HomeScreen = ({ navigation }) => {
           )}
           {bakeries.map((b) => (
             <View>
-              {b.address == address ? (
+              {b.postcode == address ? (
                 <Text key={b.id} style={styles.textWhite}>
-                  {b.name}
+                  {b.storename}
                 </Text>
               ) : (
                 <Text key={b.id} style={styles.textWhite}></Text>
@@ -114,6 +187,7 @@ const Customer_HomeScreen = ({ navigation }) => {
             onChangeText={(text) => setStorename(text)}
             style={{ borderWidth: 2, borderColor: "#E11F", margin: 20 }}
           />
+					<View style={styles.buttonview}>
           <Button
             title="検索する"
             onPress={() =>
@@ -121,15 +195,18 @@ const Customer_HomeScreen = ({ navigation }) => {
                 storename: storename,
               })
             }
-            color="#F4511E"
+            color="#FAFAFA"
           />
+					</View>
         </View>
+				<View style={styles.buttonview}>
         <Button
           class="button"
           title="パン屋専用ホーム画面へ"
-          color="#F4511E"
+          color="#FAFAFA"
           onPress={() => navigation.navigate("Start")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
         />
+				</View>
       </ImageBackground>
     </View>
   );
@@ -161,6 +238,12 @@ const styles = StyleSheet.create({
   textWhite: {
     color: "#FAFAFA",
   },
+	buttonview:{
+		backgroundColor: "#F4511E",
+		borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+	}
 });
-
 export default Customer_HomeScreen;

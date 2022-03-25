@@ -3,6 +3,7 @@ src/
 -pages/ 		--表示スクリーン画面  
 -routes/ 		--ルート管理  
 -firebase/ 	--firebaseの設定
+-styles/		--スタイルシート
 
 # 起動方法  
 ```
