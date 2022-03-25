@@ -17,15 +17,16 @@ const Bakery_HomeScreen = ({ navigation }) => {
           style={styles.image}
 				>
 			<View style={styles.box1}>
+      <Text style={styles.Text}> </Text>
       <Button
-        title="顧客ホーム画面に遷移"//変更しました（小川）
+        title="お客さん専用ページへ"//変更しました（小川）
 				color="#F4511E"
 				style={styles.button1}
         onPress={() => navigation.navigate("Customer_Home")}
       />
 
       <Text style={styles.Text}>(パン屋住所)の(パン屋店名)でログイン中</Text>
-      <Text style={styles.Text}>パンが焼けましたか？</Text>
+      <Text style={styles.Text}>パンが焼けましたか？{"\n"}パンが焼けたことを知らせましょう！</Text>
       <Button
         title="パンが焼けました"
 				color="#F4511E"
@@ -52,12 +53,14 @@ const Bakery_HomeScreen = ({ navigation }) => {
             });
         }}
       />
+      <Text style={styles.Text}> </Text>
       <Button
         title="送信結果を確認する"
 				color="#F4511E"
 				style={styles.button1}
         onPress={() => navigation.navigate("BakerySentResult")}
       />
+      <Text style={styles.Text}> </Text>
       <Button
         title="パン屋登録画面"//追加しました（小川）
 				color="#F4511E"
@@ -80,7 +83,6 @@ const styles = StyleSheet.create({
   },
   Text: {
     color:"#FAFAFA",
-    backgroundColor: "orange",
   },
 	image: {
 		flex: 1,

@@ -54,22 +54,23 @@ const Bakery_sentresult = ({ navigation }) => {
         style={styles.image}
       >
 				<View style={styles.box1}>
-          <Text style={styles.Text}>これまでの焼きたて</Text>
+          <Text style={styles.Text}> </Text>
+          <Text style={styles.textWhite}>これまでの焼きたて</Text>
 
           {bakeries.map((task) => (
-            <li>{task.bakedtime.toDate().toString()}</li>
+            <Text  style={styles.textWhite}>{task.bakedtime.toDate().toString()}</Text>
           ))}
 
           <Button
             title="パン屋検索画面に遷移"
             onPress={() => navigation.navigate("Search")}
-            color = "orange"
+            color = "#F4511E"
           />
           <Text> </Text>
           <Button
             title="焼きたて送信画面に遷移"
             onPress={() => navigation.navigate("BakeryHome")}
-            color = "orange"
+            color = "#F4511E"
           />
         </View>
       </ImageBackground>
@@ -103,10 +104,9 @@ const styles = StyleSheet.create({
     marginBottom: 'auto',
     alignItems:'center',
   },
-  Text: {
-    color: "black",
-    backgroundColor: "orange",
-  },
+  textWhite:{
+		color:"#FAFAFA"
+	}
 });
 
 export default Bakery_sentresult;

@@ -7,6 +7,8 @@ import {
   Text,
   View,
   TextInput,
+  SafeAreaView, 
+  ImageBackground 
 } from "react-native";
 
 const SearchScreen = ({ navigation }) => {
@@ -43,39 +45,73 @@ const SearchScreen = ({ navigation }) => {
 	*/
 
   return (
-    <View style={styles.container}>
-      {isLoading ? (
-        <Text>住所が出ます</Text>
-      ) : (
-        <Text>
-          {data[0].address1}
-          {data[0].address2}
-        </Text>
-      )}
-      <TextInput
-        placeholder="郵便番号"
-        onChangeText={(text) => {
-          setPostcode(text);
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={{
+          uri: "https://pictkan.com/uploads/converted/15/06/12/1571213585-background-2561_1920-jNP-1920x1280-MM-100.jpg",
         }}
-        style={{ borderWidth: 2, borderColor: "skyblue", margin: 20 }}
-      />
-      <Button
-        title="送信"
-        onPress={() => {
-          getPost();
-        }}
-      />
-    </View>
+        style={styles.image}
+      >
+        <View style={styles.box1}>
+        <Text style={styles.Text}> </Text>
+          {isLoading ? (
+            <Text style={styles.textWhite}>住所が出ます</Text>
+          ) : (
+            <Text style={styles.textWhite}>
+              {data[0].address1}
+              {data[0].address2}
+            </Text>
+          )}
+          <TextInput
+            placeholder="郵便番号"
+            onChangeText={(text) => {
+              setPostcode(text);
+            }}
+            style={{ borderWidth: 2, borderColor: "#E11F" , margin: 20 }}
+          />
+          <Button
+            title="送信"
+            onPress={() => {
+              getPost();
+            }}
+            color = "#F4511E"
+          />
+        </View>
+      </ImageBackground> 
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    flexDirection: 'column',
+    textAlign: 'center',
+    justifyContent: 'center',
+    
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
     justifyContent: "center",
   },
+  box1:{
+    backgroundColor:"#48484866",
+    width:"50%",
+    height:"50%",
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    alignItems:'center',
+  },
+  textWhite:{
+		color:"#FAFAFA"
+	}
 });
 
 export default SearchScreen;

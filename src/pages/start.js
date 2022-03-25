@@ -62,13 +62,13 @@ const StartScreen = ({ navigation }) => {
 							</View>
 							<Button title="ログイン"
 								onPress={() => {testLogin()}}
-								color = "orange"/>
+								color = "#F4511E"/>
 							
 							<Text style={styles.formLabel}>新規登録はこちらから</Text>
 							<View style={styles.formGroup}>
 								<Button title = "新規登録する"
 									onPress={() => navigation.navigate('Register')}
-									color = "orange"/>
+									color = "#F4511E"/>
 							</View>
 						</View>
 					</ImageBackground>
@@ -118,12 +118,13 @@ const styles = StyleSheet.create({
   formLabel: {
     paddingRight: 16,
 	marginVertical: 8,
+	color: "white"
   },
   formControl: {
     height: 40,
     width: 160,
     padding: 8,
-    borderColor: 'orange',
+    borderColor: '#F4511E',
     borderWidth: 1
   },
   listItem: {
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderColor: 'gray',
     borderWidth: 1,
-  }
+  },
 });
 
 export default StartScreen;

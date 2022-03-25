@@ -12,11 +12,11 @@ const LoginScreen = ({ navigation }) => {
 			>
 				<View style={styles.box1}>
 
-				<Text>ログインしました</Text>
+				<Text style={styles.textWhite}>ログインしました</Text>
 				<Button
 					title="パン屋専用ホーム画面へ"
 					onPress={() => navigation.navigate('BakeryHome')}
-					color = "orange"
+					color = "#F4511E"
 				/>
 				</View>
 			</ImageBackground>
@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
 		marginBottom: 'auto',
 		alignItems:'center',
 	  },
-	  
+	  textWhite:{
+		color:"#FAFAFA"
+	  }
 	});
 
 export default LoginScreen

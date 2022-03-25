@@ -92,6 +92,7 @@ const Customer_HomeScreen = ({ navigation }) => {
           style={styles.image}
         >
           <View style={styles.box1}>
+            <Text style={styles.Text}> </Text>
 						<Text style={styles.textWhite}>郵便番号を入力すると</Text>
 						<Text style={styles.textWhite}>近くのパン屋を検索します</Text>
             <TextInput
@@ -158,7 +159,6 @@ const styles = StyleSheet.create({
 	textWhite:{
 		color:"#FAFAFA"
 	}
-
  });
 
 export default Customer_HomeScreen;
