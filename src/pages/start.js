@@ -24,7 +24,7 @@ const StartScreen = ({ navigation }) => {
 				})
 				// 登録されていない場合は、登録する必要があるため、初期登録画面(register.js)へ
 			} else {
-				return (navigation.navigate('Register'))	
+				return (navigation.navigate('Search'))	
 			}
 		})
 	}
@@ -67,7 +67,7 @@ const StartScreen = ({ navigation }) => {
 							<Text style={styles.formLabel}>新規登録はこちらから</Text>
 							<View style={styles.formGroup}>
 								<Button title = "新規登録する"
-									onPress={() => navigation.navigate('Register')}
+									onPress={() => navigation.navigate('Search')}
 									color = "#F4511E"/>
 							</View>
 						</View>

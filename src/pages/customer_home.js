@@ -120,14 +120,21 @@ const Customer_HomeScreen = ({ navigation }) => {
             {nearbakeries.map((b) => (
               <Text  style={styles.textWhite}>{b.name}</Text>
             ))}
-            
-          </View>
-					<Button
-              class="button"
-              title="パン屋専用ホーム画面へ"
-							color="#F4511E"
-              onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
+            <Text> </Text>
+            <Button
+              title="これまでの焼き上がり時刻を検索する"
+              onPress={() => navigation.navigate("CustomerSentResult")}
+              color = "#F4511E"
             />
+          </View>
+          
+					<Button
+            class="button"
+            title="パン屋専用ホーム画面へ"
+            color="#F4511E"
+            onPress={() => navigation.navigate("Start")}
+          />
+          
         </ImageBackground>
     </View>
   );

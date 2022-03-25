@@ -60,13 +60,6 @@ const Bakery_HomeScreen = ({ navigation }) => {
 				style={styles.button1}
         onPress={() => navigation.navigate("BakerySentResult")}
       />
-      <Text style={styles.Text}> </Text>
-      <Button
-        title="パン屋登録画面"//追加しました（小川）
-				color="#F4511E"
-				style={styles.button1}
-        onPress={() => navigation.navigate("Start")}
-      />
 			</View>
 			</ImageBackground>
     </View>

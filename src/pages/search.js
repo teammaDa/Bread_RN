@@ -55,7 +55,7 @@ const SearchScreen = ({ navigation }) => {
         <View style={styles.box1}>
         <Text style={styles.Text}> </Text>
           {isLoading ? (
-            <Text style={styles.textWhite}>住所が出ます</Text>
+            <Text style={styles.textWhite}>初期登録画面で必要な「住所情報」を確認してください</Text>
           ) : (
             <Text style={styles.textWhite}>
               {data[0].address1}
@@ -76,6 +76,10 @@ const SearchScreen = ({ navigation }) => {
             }}
             color = "#F4511E"
           />
+          <Text> </Text>
+          <Button title = "新規登録画面へ進む"
+									onPress={() => navigation.navigate('Register')}
+									color = "#F4511E"/>
         </View>
       </ImageBackground> 
     </SafeAreaView>

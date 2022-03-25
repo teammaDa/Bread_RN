@@ -46,12 +46,12 @@ const RegisterScreen = ({ navigation }) => {
               />
             </View>
 
-            <Text style={styles.formLabel}>お店の所在地を、郵便番号で登録してください</Text>
-            <Text style={styles.formLabel}>郵便番号</Text>
+            <Text style={styles.formLabel}>郵便番号から取得した住所を登録してください</Text>
+            <Text style={styles.formLabel}>住所</Text>
             <View style={styles.formGroup}>
               <TextInput
                 style={styles.formControl}
-                placeholder="postcode"
+                placeholder="address from postcode"
                 onChangeText={(text) => setPostcode(text)}
               />
             </View>
