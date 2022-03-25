@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,useRef} from "react";
 import { firebase } from "../firebase/firebase";
 import {
   ActivityIndicator,
@@ -11,7 +11,52 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-//import css from "./style.css";
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+
+import styles from "../styles/styles";
+
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
+//トークンを取得
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Device.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  return token;
+}
+
 
 //中島さんのsearchをコピペしました！
 const Customer_HomeScreen = ({ navigation }) => {
@@ -21,7 +66,10 @@ const Customer_HomeScreen = ({ navigation }) => {
   const [bakeries, setBakeries] = useState([]);
   const [nearbakeries, setNearBakeries] = useState([]);
 	const [address,setAddress]=useState("");
-  
+  const [expoPushToken, setExpoPushToken] = useState('');
+	const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
 
   const getPost = async () => {
     try {
@@ -54,6 +102,19 @@ const Customer_HomeScreen = ({ navigation }) => {
           querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
       });
+			registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+		notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
   }, []);
 
   return (
@@ -83,6 +144,16 @@ const Customer_HomeScreen = ({ navigation }) => {
 							color="#F4511E"
               onPress={() => {
                 getPost();
+								firebase.firestore().collection("Clients").doc(expoPushToken)
+						.set({
+								//焼きたて時刻のみ保存
+								token:expoPushToken,
+						}).then(() => {
+								console.log("Document successfully written!");
+								navigation.navigate('Notification');
+						}).catch((error) => {
+								console.error("Error writing document: ", error);
+						});
               }}
             ></Button>
             {isLoading ? (
@@ -112,39 +183,12 @@ const Customer_HomeScreen = ({ navigation }) => {
           class="button"
           title="パン屋専用ホーム画面へ"
           color="#F4511E"
-          onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
+          onPress={() => navigation.navigate("Start")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
         />
       </ImageBackground>
     </View>
   );
 };
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		flexDirection: "column"
-	},
-	image: {
-		flex: 1,
-		resizeMode: "cover",
-		justifyContent: "center"
-	},
-	box1:{
-		backgroundColor:"#48484880",
-		width:"50%",
-		height:"50%",
-    borderBottomLeftRadius: 7,
-    borderBottomRightRadius: 7,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-		marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 'auto',
-    marginBottom: 'auto',
-		alignItems:'center',
-	},
-	textWhite:{
-		color:"#FAFAFA"
-	}
- });
+
 
 export default Customer_HomeScreen;

@@ -16,6 +16,47 @@ const Bakery_HomeScreen = ({ navigation }) => {
   const storename = route.params.storename; //引き継いだ値をstorenameに代入
   console.log(route.params.postcode);
   console.log(route.params.storename);
+	const [users, setUsers] = useState([]);
+	//通知を送信
+	async function sendPushNotification(expoPushToken) {
+		const message = {
+			to: expoPushToken,
+			sound: 'default',
+			title: 'パン焼けたよ',
+			body: 'おいしいパンが焼けました',
+			data: { someData: 'goes here' },
+		};
+	
+		await fetch('https://exp.host/--/api/v2/push/send', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Accept-encoding': 'gzip, deflate',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(message),
+		});
+	}
+	
+	//user全員に送信
+	const sendNotification= async () => {
+		for(var i=0;i<users.length;i++){
+			
+			sendPushNotification(users[i].token);
+		}
+	}
+
+	//firestoreのユーザデータ取得
+  useEffect(() => {
+    firebase.firestore().collection('Clients').get().then((querySnapshot) => {
+      setUsers(
+        querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    });
+
+  }, []);
+
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -44,6 +85,8 @@ const Bakery_HomeScreen = ({ navigation }) => {
             color="#F4511E"
             style={styles.button1}
             onPress={() => {
+
+							sendNotification();
               //Bakedコレクションに各店舗ドキュメントをつくり、そこに焼き上がり情報(タイムスタンプ)を入れる
 
               //login.jsから引き継いだpostcodeとstorenameを使って 3/25
@@ -72,12 +115,16 @@ const Bakery_HomeScreen = ({ navigation }) => {
             title="送信結果を確認する"
             color="#F4511E"
             style={styles.button1}
-            onPress={() =>
+            onPress={() =>{
+
+						
               navigation.navigate("BakerySentResult", {
                 storename: storename,
                 postcode: postcode,
-              })
-            }
+              });
+							
+						
+						}}
           />
         </View>
       </ImageBackground>
