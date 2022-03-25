@@ -10,7 +10,7 @@ import {
   TextInput,
   ScrollView,
   ImageBackground,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 //import firestore from "@react-native-firebase/firestore";
 //import { format } from "date-fns";
@@ -23,7 +23,7 @@ import {
 //var docRef = db.collection("bakery");
 //var bakedtime = []; //時刻を読み込んで格納するarrayを宣言
 
-const Bakery_sentresult = ({ navigation }) => {
+const Customer_sentresult = ({ navigation }) => {
   console.log("OK1!");
   const myTimestamp2 = firebase.firestore.Timestamp.now().toDate();
   const [isLoading, setLoading] = useState(true);
@@ -53,19 +53,20 @@ const Bakery_sentresult = ({ navigation }) => {
         }}
         style={styles.image}
       >
-				<View style={styles.box1}>
+        <View style={styles.box1}>
           <Text style={styles.Text}> </Text>
           <Text style={styles.formLabel}>これまでの焼きたて</Text>
 
           {bakeries.map((task) => (
-            <Text  style={styles.formLabel}>{task.bakedtime.toDate().toString()}</Text>
+            <Text style={styles.formLabel}>
+              {task.bakedtime.toDate().toString()}
+            </Text>
           ))}
-
           <Text> </Text>
           <Button
-            title="焼きたて送信画面に戻る"
-            onPress={() => navigation.navigate("BakeryHome")}
-            color = "#F4511E"
+            title="パン屋検索画面へ"
+            onPress={() => navigation.navigate("Customer_Home")}
+            color="#F4511E"
           />
         </View>
       </ImageBackground>
@@ -76,38 +77,36 @@ const Bakery_sentresult = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    textAlign: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    textAlign: "center",
+    justifyContent: "center",
   },
   image: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
   },
-  box1:{
-    backgroundColor:"#484848aa",
-    width:"auto",
-    height:"auto",
+  box1: {
+    backgroundColor: "#484848aa",
+    width: "auto",
+    height: "auto",
     borderBottomLeftRadius: 7,
     borderBottomRightRadius: 7,
     borderTopLeftRadius: 7,
     borderTopRightRadius: 7,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginTop: 'auto',
-    marginBottom: 'auto',
-    alignItems:'center',
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "auto",
+    marginBottom: "auto",
+    alignItems: "center",
     padding:35
   },
-  textWhite:{
-		color:"#FAFAFA"
-	},
   formLabel: {
     marginVertical: 8,
     color: "white",
     fontSize: 15,
   },
+
 });
 
-export default Bakery_sentresult;
+export default Customer_sentresult;
