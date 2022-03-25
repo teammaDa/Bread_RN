@@ -13,16 +13,11 @@ import {
   SafeAreaView,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
-//import firestore from "@react-native-firebase/firestore";
-//import { format } from "date-fns";
+import dayjs from "dayjs";
 
 //保手濱担当画面
 //焼きたて情報送信結果画面
-//bakery_home.jsでも書いた通り、焼きたて情報はパン屋別ドキュメントにて上書きされるため
-//常に1つだけ焼きたて時刻が残ってるはず
-//const db = firebase.firestore();
-//var docRef = db.collection("bakery");
-//var bakedtime = []; //時刻を読み込んで格納するarrayを宣言
+
 
 const Bakery_sentresult = ({ navigation }) => {
   console.log("OK1!");
@@ -36,6 +31,8 @@ const Bakery_sentresult = ({ navigation }) => {
 
   //console.log(myTimestamp2);
   //ログイン中の店舗のみでの焼きたて時刻一覧を表示 3/25
+  //時刻表示を整形した。3/25
+  //参考：https://qiita.com/okonomiyaki11/items/aefa7397d1f0d43dcd58 2つめの方法
   useEffect(() => {
     firebase
       .firestore()
@@ -66,7 +63,9 @@ const Bakery_sentresult = ({ navigation }) => {
 
           {bakeries.map((task) => (
             <Text style={styles.textWhite}>
-              {task.bakedtime.toDate().toString()}
+              {dayjs(task.bakedtime.toDate().toString()).format(
+                "YYYY/MM/DD HH:mm"
+              )}
             </Text>
           ))}
 

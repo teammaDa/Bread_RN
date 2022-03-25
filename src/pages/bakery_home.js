@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Button, Text, View, ImageBackground } from "react-native";
 import { firebase } from "../firebase/firebase";
 import { useRoute } from "@react-navigation/native";
-//import firestore from "@react-native-firebase/firestore";
-//import { format } from "date-fns";
 
 //パン屋としてログイン後、Home画面。ここで焼き上がり送信もする。
 //保手濱担当画面
@@ -86,7 +84,7 @@ const Bakery_HomeScreen = ({ navigation }) => {
 };
 //将来的に焼き上がり情報にパンの種類を入れるようになった場合、
 //各店舗ドキュメント内に一度の焼き上がりサブコレクションを作り、
-//そこにタイムスタンプとパンの種類を入れると思う
+//そこにタイムスタンプとパンの種類を入れるとか？
 
 const styles = StyleSheet.create({
   container: {
