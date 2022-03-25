@@ -9,7 +9,9 @@ import {
   View,
   TextInput,
   ScrollView,
+  ImageBackground,
 } from "react-native";
+//import css from "./style.css";
 
 //中島さんのsearchをコピペしました！
 const Customer_HomeScreen = ({ navigation }) => {
@@ -83,49 +85,80 @@ const Customer_HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        placeholder="郵便番号"
-        onChangeText={(text) => {
-          setPostcode(text);
-        }}
-        style={{ borderWidth: 2, borderColor: "skyblue", margin: 20 }}
-      />
-      <Button
-        title="送信"
-        onPress={() => {
-          //ここが反映されないので、改善が必要です。
-          if (!bakeries[0].name && bakeries[0].postcode) {
-            <Text>検索結果がありません</Text>;
-            getPost();
-          } else {
-            getPost();
-          }
-        }}
-      />
-      {isLoading ? (
-        <Text></Text>
-      ) : (
-        <Text>{data[0].address1 + data[0].address2}の近くのパン屋</Text>
-      )}
-      {nearbakeries.map((b) => (
-        <Text>{b.name}</Text>
-      ))}
-      <Button
-        title="パン屋専用ホーム画面へ（今だけログイン画面へ）"
-        onPress={() => navigation.navigate("Start")}
-        // ログイン画面確認のために、BakeryHome　からログイン画面に一時的に変更
-      />
+        <ImageBackground
+          source={{
+            uri: "https://pictkan.com/uploads/converted/15/06/12/1571213585-background-2561_1920-jNP-1920x1280-MM-100.jpg",
+          }}
+          style={styles.image}
+        >
+          <View style={styles.box1}>
+						<Text style={styles.textWhite}>郵便番号を入力すると</Text>
+						<Text style={styles.textWhite}>近くのパン屋を検索します</Text>
+            <TextInput
+              class="textInput"
+              placeholder="郵便番号"
+              onChangeText={(text) => {
+                setPostcode(text);
+              }}
+              style={{ borderWidth: 2, borderColor: "#E11F", margin: 20 }}
+            />
+
+            <Button
+              class="button"
+              title="送信"
+							color="#F4511E"
+              onPress={() => {
+                getPost();
+              }}
+            ></Button>
+            {isLoading ? (
+              <Text></Text>
+            ) : (
+              <Text  style={styles.textWhite}>{data[0].address1 + data[0].address2}の近くのパン屋</Text>
+            )}
+            {nearbakeries.map((b) => (
+              <Text  style={styles.textWhite}>{b.name}</Text>
+            ))}
+            
+          </View>
+					<Button
+              class="button"
+              title="パン屋専用ホーム画面へ"
+							color="#F4511E"
+              onPress={() => navigation.navigate("BakeryHome")} //3/19 Bakery_Homeとなっていたため保手濱がデバッグ
+            />
+        </ImageBackground>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+	container: {
+		flex: 1,
+		flexDirection: "column"
+	},
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center"
+	},
+	box1:{
+		backgroundColor:"#48484880",
+		width:"50%",
+		height:"50%",
+    borderBottomLeftRadius: 7,
+    borderBottomRightRadius: 7,
+    borderTopLeftRadius: 7,
+    borderTopRightRadius: 7,
+		marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+		alignItems:'center',
+	},
+	textWhite:{
+		color:"#FAFAFA"
+	}
+
+ });
 
 export default Customer_HomeScreen;

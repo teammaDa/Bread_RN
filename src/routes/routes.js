@@ -27,6 +27,7 @@ export default function Router() {
         <Stack.Screen name="Start" component={StartScreen} />
         <Stack.Screen name="BakeryHome" component={Bakery_HomeScreen} />
         <Stack.Screen name="BakerySentResult" component={Bakery_sentresult} />
+				<Stack.Screen name="BakeryHome" component={Bakery_HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
